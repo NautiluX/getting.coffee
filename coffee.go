@@ -14,7 +14,7 @@ func main() {
 	fs := http.FileServer(http.Dir("./content"))
 	http.Handle("/", fs)
 	http.HandleFunc("/img/", readme)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":80", nil)
 }
 
 func readme(res http.ResponseWriter, req *http.Request) {
