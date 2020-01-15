@@ -1,7 +1,9 @@
-coffee:
-  image: nginx
-  volumes:
-   - ./content:/usr/share/nginx/html:ro
-   - ./nginx.conf:/etc/nginx/nginx.conf:ro
-  ports:
-   - "8080:80"
+version: "3.7"
+services:
+  coffee:
+    volumes:
+      - .:/src
+    ports:
+     - "8080:8080"
+    build: .
+
