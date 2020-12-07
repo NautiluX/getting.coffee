@@ -2,9 +2,11 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	r "math/rand"
 	"net/http"
 	"os"
+	"path"
 	"path/filepath"
 	"strings"
 	"time"
@@ -12,12 +14,34 @@ import (
 
 func main() {
 	fs := http.FileServer(http.Dir("./content"))
-	http.Handle("/", fs)
-	http.HandleFunc("/img/", readme)
-	http.ListenAndServe(":80", nil)
+	http.Handle("/favicon.ico", fs)
+	http.Handle("/icon.png", fs)
+	http.Handle("/site.webmanifest", fs)
+	http.HandleFunc("/", index)
+	http.HandleFunc("/img/", serveGif)
+	http.ListenAndServe(":8080", nil)
 }
 
-func readme(res http.ResponseWriter, req *http.Request) {
+type Config struct {
+	Title       string
+	Description string
+}
+
+func index(res http.ResponseWriter, req *http.Request) {
+	config := Config{"Getting coffee, brb ...", "Be right back!"}
+	fp := path.Join("content", "index-template.html")
+	tmpl, err := template.ParseFiles(fp)
+	if err != nil {
+		http.Error(res, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	if err := tmpl.Execute(res, config); err != nil {
+		http.Error(res, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+func serveGif(res http.ResponseWriter, req *http.Request) {
 	res.Header().Set("Pragma-directive", "no-cache")
 	res.Header().Set("Cache-directive", "no-cache")
 	res.Header().Set("Cache-control", "no-store")

@@ -11,15 +11,20 @@ html {
     height: 100vh;
     width: 100vw;
   }
-  div#content {
-  margin:auto;
-    color: #ffffff;
-    width: 100%;
+  div#wrap {
     height: 100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     flex-direction: column;
+  }
+  div#content {
+    background-color: #a0a0a0;
+    margin:auto;
+    color: #111111;
+    width: 100%;
+    height: auto;
     max-width:600px;
+    text-align: center;
   }
   div#gif-div {
     margin: auto;
@@ -32,11 +37,8 @@ html {
     width:100%;
   }
     </style>
-    <link rel="alternate" type="application/json+oembed"
-  href="https://getting.coffee/api/oembed/?url=http%3A%2F%2Fgetting.coffee&format=json"
-  title="getting coffee - brb" />
     <meta charset="utf-8">
-    <title>getting coffee - brb</title>
+    <title>{{ .Title }}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -44,13 +46,11 @@ html {
     <link rel="apple-touch-icon" href="icon.png">
     <!-- Place favicon.ico in the root directory -->
 
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/main.css">
 
     <meta name="theme-color" content="#ffffff">
 
-    <meta property="og:title" content="getting coffee, brb">
-    <meta property="og:description" content="be right back...">
+    <meta property="og:title" content="{{ .Title }}">
+    <meta property="og:description" content="{{ .Description }}">
     <meta property="og:image" content="https://getting.coffee/img/coffee_thumb.gif">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://getting.coffee/img/coffee_thumb.gif">
@@ -62,19 +62,12 @@ html {
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div id="content">
-      <div>
-      <h1>getting coffee - brb</h1>
+    <div id="wrap">
+      <div id="content">
+        <div id="gif-div"><img src="/img/coffee.gif"></img></div>
+        <div><h1>{{ .Title }}</h1>{{ .Description }}</div>
       </div>
-      <div id="gif-div"><img src="/img/coffee.gif"></img></div>
     </div>
-    <script src="js/vendor/modernizr-3.7.1.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
-    <script src="js/plugins.js"></script>
-    <script src="js/main.js"></script>
-
-    <script src="https://www.google-analytics.com/analytics.js" async></script>
   </body>
 
 </html>
