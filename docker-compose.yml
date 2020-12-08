@@ -5,9 +5,10 @@ services:
       - COFFEE_GIFDIR=/gif
       - COFFEE_TITLE=Getting coffee, brb
       - COFFEE_DESCRIPTION=Be right back!
+      - COFFEE_URL=http://localhost:8080
     volumes:
       - .:/src
-      - ./example-gifs:/gif
+      - ./food-gifs:/gif
     ports:
      - "8080:8080"
     build: .

@@ -17,7 +17,7 @@ type CoffeeEngine struct {
 }
 
 func main() {
-	config := Config{os.Getenv("COFFEE_TITLE"), os.Getenv("COFFEE_DESCRIPTION"), os.Getenv("COFFEE_GIFDIR")}
+	config := Config{os.Getenv("COFFEE_TITLE"), os.Getenv("COFFEE_DESCRIPTION"), os.Getenv("COFFEE_URL"), os.Getenv("COFFEE_GIFDIR")}
 	config.HealthCheck()
 	c := CoffeeEngine{config}
 	c.StartServer()
@@ -26,6 +26,7 @@ func main() {
 type Config struct {
 	Title       string
 	Description string
+	Url         string
 	GifDir      string
 }
 
@@ -38,6 +39,9 @@ func (c *Config) HealthCheck() {
 	}
 	if c.Description == "" {
 		panic(fmt.Errorf("environment variable COFFEE_DESCRIPTION not set."))
+	}
+	if c.Url == "" {
+		panic(fmt.Errorf("environment variable COFFEE_URL not set. This should point to the public URL of this service to allow unfurling in Slack etc."))
 	}
 	if _, err := os.Stat(c.GifDir); os.IsNotExist(err) {
 		panic(fmt.Errorf("Path %s doesn't exist", c.GifDir))
