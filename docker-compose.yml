@@ -1,9 +1,13 @@
 version: "3.7"
 services:
   coffee:
+    environment:
+      - COFFEE_GIFDIR=/gif
+      - COFFEE_TITLE="Getting coffee, brb"
+      - COFFEE_DESCRIPTION="Be right back!"
     volumes:
       - .:/src
+      - ./example-gifs:/gif
     ports:
      - "8080:8080"
     build: .
-
