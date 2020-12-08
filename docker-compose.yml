@@ -3,8 +3,8 @@ services:
   coffee:
     environment:
       - COFFEE_GIFDIR=/gif
-      - COFFEE_TITLE="Getting coffee, brb"
-      - COFFEE_DESCRIPTION="Be right back!"
+      - COFFEE_TITLE=Getting coffee, brb
+      - COFFEE_DESCRIPTION=Be right back!
     volumes:
       - .:/src
       - ./example-gifs:/gif
